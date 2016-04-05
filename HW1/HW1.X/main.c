@@ -61,12 +61,14 @@ int main() {
     __builtin_enable_interrupts();
     
     while(1) {
-	    // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
-        // remember the core timer runs at half the CPU speed
-        _CP0_SET_COUNT(0);
-        while(_CP0_GET_COUNT() < 12000)
+        
+        _CP0_SET_COUNT(0);  // Set system clock to zero
+        while(_CP0_GET_COUNT() < 12000) // Wait for 0.5 ms
         {;} // wait
-        LATAINV = 10000;	
+        LATAINV = 10000;    // Flip power to LED
+        
+        while(!PORTBbits.RB4)
+        {;} // do nothing
     }
     
     
