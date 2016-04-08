@@ -16418,6 +16418,20 @@ Used on FTDI breakouts</description>
 <wire x1="2" y1="-8" x2="2" y2="4" width="0.127" layer="21"/>
 <wire x1="2" y1="4" x2="-2" y2="4" width="0.127" layer="21"/>
 </package>
+<package name="SLIDERSWITCH">
+<hole x="0" y="2" drill="0.8"/>
+<hole x="0" y="-2" drill="0.8"/>
+<hole x="0" y="-4" drill="1"/>
+<hole x="0" y="4" drill="1"/>
+<wire x1="-2" y1="6" x2="-2" y2="-6" width="0.127" layer="21"/>
+<wire x1="-2" y1="-6" x2="2" y2="-6" width="0.127" layer="21"/>
+<wire x1="2" y1="-6" x2="2" y2="6" width="0.127" layer="21"/>
+<wire x1="2" y1="6" x2="-2" y2="6" width="0.127" layer="21"/>
+<hole x="0" y="0" drill="0.8"/>
+<pad name="P$1" x="0" y="0" drill="0.8" shape="octagon"/>
+<pad name="P$2" x="0" y="2.032" drill="0.8" shape="octagon"/>
+<pad name="P$3" x="0" y="-2.032" drill="0.8" shape="octagon"/>
+</package>
 </packages>
 <symbols>
 <symbol name="R-US">
@@ -23943,6 +23957,29 @@ Standard 15-pin 0.1" header. Use with straight break away headers (SKU : PRT-001
 </gates>
 <devices>
 <device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SLIDESWITCH">
+<gates>
+<gate name="G$1" symbol="SLIDERSWITCH" x="0" y="-2.54"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SLIDERSWITCH">
+<gates>
+</gates>
+<devices>
+<device name="" package="SLIDERSWITCH">
 <technologies>
 <technology name=""/>
 </technologies>
