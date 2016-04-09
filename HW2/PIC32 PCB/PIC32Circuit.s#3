@@ -16231,20 +16231,20 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <instances>
 <instance part="R4" gate="G$1" x="142.24" y="205.74"/>
 <instance part="LED1" gate="G$1" x="152.4" y="205.74" rot="R90"/>
-<instance part="C1" gate="G$1" x="71.12" y="198.12"/>
+<instance part="C1" gate="G$1" x="73.66" y="200.66"/>
 <instance part="C1*" gate="G$1" x="185.42" y="210.82" rot="R180"/>
 <instance part="U$1" gate="G$1" x="111.76" y="152.4"/>
 <instance part="U$2" gate="G$1" x="88.9" y="213.36" rot="R90"/>
 <instance part="J1" gate="G$1" x="114.3" y="215.9" rot="R90"/>
 <instance part="RESONATOR" gate="J$1" x="43.18" y="134.62"/>
 <instance part="J4" gate="G$1" x="180.34" y="127" rot="R180"/>
-<instance part="J5" gate="G$1" x="180.34" y="175.26" rot="R180"/>
+<instance part="J5" gate="G$1" x="182.88" y="175.26" rot="R180"/>
 <instance part="U$3" gate="G$1" x="147.32" y="220.98" rot="R270"/>
 <instance part="PICKIT3" gate="G$1" x="58.42" y="170.18"/>
 <instance part="C2" gate="G$1" x="175.26" y="213.36"/>
 <instance part="C3" gate="G$1" x="139.7" y="182.88"/>
-<instance part="C4" gate="G$1" x="78.74" y="137.16"/>
-<instance part="PBSWITCH" gate="J$1" x="40.64" y="170.18" rot="R270"/>
+<instance part="C4" gate="G$1" x="78.74" y="134.62"/>
+<instance part="PBSWITCH" gate="J$1" x="40.64" y="172.72" rot="R270"/>
 <instance part="R1" gate="G$1" x="53.34" y="152.4"/>
 <instance part="R2" gate="G$1" x="40.64" y="96.52"/>
 <instance part="PBSWITCH1" gate="J$1" x="50.8" y="86.36" rot="R180"/>
@@ -16273,7 +16273,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </segment>
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
-<wire x1="71.12" y1="193.04" x2="66.04" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="195.58" x2="66.04" y2="193.04" width="0.1524" layer="91"/>
 <label x="60.96" y="193.04" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -16303,7 +16303,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <pinref part="U$1" gate="G$1" pin="13.VDD"/>
 <wire x1="96.52" y1="121.92" x2="78.74" y2="121.92" width="0.1524" layer="91"/>
 <pinref part="C4" gate="G$1" pin="2"/>
-<wire x1="78.74" y1="121.92" x2="78.74" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="121.92" x2="78.74" y2="129.54" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="121.92" x2="73.66" y2="121.92" width="0.1524" layer="91"/>
 <junction x="78.74" y="121.92"/>
 <label x="68.58" y="121.92" size="1.778" layer="95"/>
@@ -16320,7 +16320,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </segment>
 <segment>
 <pinref part="PBSWITCH" gate="J$1" pin="1"/>
-<wire x1="38.1" y1="162.56" x2="38.1" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="165.1" x2="38.1" y2="157.48" width="0.1524" layer="91"/>
 <wire x1="38.1" y1="157.48" x2="33.02" y2="157.48" width="0.1524" layer="91"/>
 <label x="27.94" y="157.48" size="1.778" layer="95"/>
 </segment>
@@ -16341,7 +16341,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </segment>
 <segment>
 <pinref part="J5" gate="G$1" pin="8"/>
-<wire x1="175.26" y1="165.1" x2="172.72" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="165.1" x2="172.72" y2="165.1" width="0.1524" layer="91"/>
 <label x="170.18" y="165.1" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -16400,7 +16400,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <pinref part="U$2" gate="G$1" pin="P$2"/>
 <wire x1="88.9" y1="210.82" x2="88.9" y2="200.66" width="0.1524" layer="91"/>
 <pinref part="C1" gate="G$1" pin="1"/>
-<wire x1="88.9" y1="200.66" x2="71.12" y2="200.66" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="200.66" x2="73.66" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="200.66" x2="88.9" y2="195.58" width="0.1524" layer="91"/>
 <junction x="88.9" y="200.66"/>
 <label x="88.9" y="193.04" size="1.778" layer="95"/>
@@ -16456,7 +16456,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <pinref part="U$1" gate="G$1" pin="8.VSS"/>
 <wire x1="96.52" y1="147.32" x2="78.74" y2="147.32" width="0.1524" layer="91"/>
 <pinref part="C4" gate="G$1" pin="1"/>
-<wire x1="78.74" y1="147.32" x2="78.74" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="147.32" x2="78.74" y2="137.16" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="147.32" x2="73.66" y2="147.32" width="0.1524" layer="91"/>
 <junction x="78.74" y="147.32"/>
 <label x="68.58" y="147.32" size="1.778" layer="95"/>
@@ -16483,7 +16483,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </segment>
 <segment>
 <pinref part="J5" gate="G$1" pin="7"/>
-<wire x1="175.26" y1="167.64" x2="172.72" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="167.64" x2="172.72" y2="167.64" width="0.1524" layer="91"/>
 <label x="170.18" y="167.64" size="1.778" layer="95"/>
 </segment>
 </net>
@@ -16536,7 +16536,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <junction x="66.04" y="157.48"/>
 <wire x1="66.04" y1="157.48" x2="43.18" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="PBSWITCH" gate="J$1" pin="3"/>
-<wire x1="43.18" y1="157.48" x2="43.18" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="157.48" x2="43.18" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="2"/>
 </segment>
 </net>
@@ -16578,10 +16578,11 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <junction x="33.02" y="96.52"/>
 <wire x1="33.02" y1="88.9" x2="43.18" y2="88.9" width="0.1524" layer="91"/>
 <label x="25.4" y="96.52" size="1.778" layer="95"/>
+<pinref part="PBSWITCH1" gate="J$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="J5" gate="G$1" pin="5"/>
-<wire x1="175.26" y1="172.72" x2="172.72" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="172.72" x2="172.72" y2="172.72" width="0.1524" layer="91"/>
 <label x="170.18" y="172.72" size="1.778" layer="95"/>
 </segment>
 </net>
@@ -16598,7 +16599,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </segment>
 <segment>
 <pinref part="J5" gate="G$1" pin="6"/>
-<wire x1="175.26" y1="170.18" x2="172.72" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="170.18" x2="172.72" y2="170.18" width="0.1524" layer="91"/>
 <label x="170.18" y="170.18" size="1.778" layer="95"/>
 </segment>
 </net>
@@ -16619,7 +16620,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <net name="A0" class="0">
 <segment>
 <pinref part="J5" gate="G$1" pin="1"/>
-<wire x1="175.26" y1="182.88" x2="172.72" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="182.88" x2="172.72" y2="182.88" width="0.1524" layer="91"/>
 <label x="170.18" y="182.88" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -16631,7 +16632,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <net name="A1" class="0">
 <segment>
 <pinref part="J5" gate="G$1" pin="2"/>
-<wire x1="175.26" y1="180.34" x2="172.72" y2="180.34" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="180.34" x2="172.72" y2="180.34" width="0.1524" layer="91"/>
 <label x="170.18" y="180.34" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -16643,7 +16644,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <net name="B2" class="0">
 <segment>
 <pinref part="J5" gate="G$1" pin="3"/>
-<wire x1="175.26" y1="177.8" x2="172.72" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="177.8" x2="172.72" y2="177.8" width="0.1524" layer="91"/>
 <label x="170.18" y="177.8" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -16655,7 +16656,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <net name="B3" class="0">
 <segment>
 <pinref part="J5" gate="G$1" pin="4"/>
-<wire x1="175.26" y1="175.26" x2="172.72" y2="175.26" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="175.26" x2="172.72" y2="175.26" width="0.1524" layer="91"/>
 <label x="170.18" y="175.26" size="1.778" layer="95"/>
 </segment>
 <segment>
