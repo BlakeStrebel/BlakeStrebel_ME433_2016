@@ -1,3 +1,4 @@
 build/default/production/main.o:  \
 main.c  \
-SPI.h 
+SPI.h  \
+I2C.h 

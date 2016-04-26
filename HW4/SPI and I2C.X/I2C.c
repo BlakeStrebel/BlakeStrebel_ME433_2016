@@ -1,149 +1,80 @@
-/* ************************************************************************** */
-/** Descriptive File Name
+#include<xc.h>           // processor SFR definitions
+#include<sys/attribs.h>  // __ISR macro
 
-  @Company
-    Company Name
+#define ADDRESS 0b0100000   // Expander address
 
-  @File Name
-    filename.c
-
-  @Summary
-    Brief description of the file.
-
-  @Description
-    Describe the purpose of this file.
- */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-/* Section: Included Files                                                    */
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-/* This section lists the other files that are included in this file.
- */
-
-/* TODO:  Include other files here if needed. */
-
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-/* Section: File Scope or Global Data                                         */
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-/*  A brief description of a section can be given directly below the section
-    banner.
- */
-
-/* ************************************************************************** */
-/** Descriptive Data Item Name
-
-  @Summary
-    Brief one-line summary of the data item.
-    
-  @Description
-    Full description, explaining the purpose and usage of data item.
-    <p>
-    Additional description in consecutive paragraphs separated by HTML 
-    paragraph breaks, as necessary.
-    <p>
-    Type "JavaDoc" in the "How Do I?" IDE toolbar for more information on tags.
-    
-  @Remarks
-    Any additional remarks
- */
-int global_data;
-
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-// Section: Local Functions                                                   */
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-/*  A brief description of a section can be given directly below the section
-    banner.
- */
-
-/* ************************************************************************** */
-
-/** 
-  @Function
-    int ExampleLocalFunctionName ( int param1, int param2 ) 
-
-  @Summary
-    Brief one-line description of the function.
-
-  @Description
-    Full description, explaining the purpose and usage of the function.
-    <p>
-    Additional description in consecutive paragraphs separated by HTML 
-    paragraph breaks, as necessary.
-    <p>
-    Type "JavaDoc" in the "How Do I?" IDE toolbar for more information on tags.
-
-  @Precondition
-    List and describe any required preconditions. If there are no preconditions,
-    enter "None."
-
-  @Parameters
-    @param param1 Describe the first parameter to the function.
-    
-    @param param2 Describe the second parameter to the function.
-
-  @Returns
-    List (if feasible) and describe the return values of the function.
-    <ul>
-      <li>1   Indicates an error occurred
-      <li>0   Indicates an error did not occur
-    </ul>
-
-  @Remarks
-    Describe any special behavior not described above.
-    <p>
-    Any additional remarks.
-
-  @Example
-    @code
-    if(ExampleFunctionName(1, 2) == 0)
-    {
-        return 3;
-    }
- */
-static int ExampleLocalFunction(int param1, int param2) {
-    return 0;
+void i2c_master_setup(void) {
+  I2C2BRG = 53;                    // I2CBRG = [1/(2*Fsck) - PGD]*Pblck - 2 
+                                   // Fsck is the frequency (400kHz), PGD = 104 ns
+  I2C2CONbits.ON = 1;              // turn on the I2C2 module
 }
 
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-// Section: Interface Functions                                               */
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-/*  A brief description of a section can be given directly below the section
-    banner.
- */
-
-// *****************************************************************************
-
-/** 
-  @Function
-    int ExampleInterfaceFunctionName ( int param1, int param2 ) 
-
-  @Summary
-    Brief one-line description of the function.
-
-  @Remarks
-    Refer to the example_file.h interface header for function usage details.
- */
-int ExampleInterfaceFunction(int param1, int param2) {
-    return 0;
+// Start a transmission on the I2C bus
+void i2c_master_start(void) {
+    I2C2CONbits.SEN = 1;            // send the start bit
+    while(I2C2CONbits.SEN) { ; }    // wait for the start bit to be sent
 }
 
+void i2c_master_restart(void) {     
+    I2C2CONbits.RSEN = 1;           // send a restart 
+    while(I2C2CONbits.RSEN) { ; }   // wait for the restart to clear
+}
 
-/* *****************************************************************************
- End of File
- */
+void i2c_master_send(unsigned char byte) { // send a byte to slave
+  I2C2TRN = byte;                   // if an address, bit 0 = 0 for write, 1 for read
+  while(I2C2STATbits.TRSTAT) { ; }  // wait for the transmission to finish
+  if(I2C2STATbits.ACKSTAT) {        // if this is high, slave has not acknowledged
+    LATAINV = 10000;    
+    // ("I2C2 Master: failed to receive ACK\r\n");
+  }
+}
+
+unsigned char i2c_master_recv(void) { // receive a byte from the slave
+    I2C2CONbits.RCEN = 1;             // start receiving data
+    while(!I2C2STATbits.RBF) { ; }    // wait to receive the data
+    return I2C2RCV;                   // read and return the data
+}
+
+void i2c_master_ack(int val) {        // sends ACK = 0 (slave should send another byte)
+                                      // or NACK = 1 (no more bytes requested from slave)
+    I2C2CONbits.ACKDT = val;          // store ACK/NACK in ACKDT
+    I2C2CONbits.ACKEN = 1;            // send ACKDT
+    while(I2C2CONbits.ACKEN) { ; }    // wait for ACK/NACK to be sent
+}
+
+void i2c_master_stop(void) {          // send a STOP:
+  I2C2CONbits.PEN = 1;                // comm is complete and master relinquishes bus
+  while(I2C2CONbits.PEN) { ; }        // wait for STOP to complete
+}
+
+void initExpander(void) {
+    
+    // Configure I/O pins (IODIR)
+    i2c_master_start();     // make the start bit
+    i2c_master_send(ADDRESS<<1|0); // write the address, shifted left by 1, or'ed with a 0 to indicate writing
+    i2c_master_send(0x00);  // write to IODIR
+    i2c_master_send(0xF0);  // GP0-3 outputs, GP4-7 inputs
+    i2c_master_stop();      // make the stop bit    
+}
+
+void setExpander(unsigned char pin, char level) {    
+    // Set output (OLAT)
+    i2c_master_start();             // make the start bit
+    i2c_master_send(ADDRESS<<1|0);  // write the address, shifted left by 1, or'ed with a 0 to indicate writing
+    i2c_master_send(0x0A);          // write to OLAT
+    i2c_master_send(0x00 | (level<<(int)pin));  // Set pins as determined by inputs
+    i2c_master_stop();              // make the stop bit
+}
+
+unsigned char getExpander(void) {
+    // Read PORT (GPIO) Register
+    i2c_master_start();             // make the start bit
+    i2c_master_send(ADDRESS<<1|0);  // write the address, shifted left by 1, or'ed with a 0 to indicate writing
+    i2c_master_send(0x09);          // read from GPIO
+    i2c_master_restart();           // make the restart bit
+    i2c_master_send(ADDRESS<<1|1);  // write the address, shifted left by 1, or'ed with a 1 to indicate reading
+    char r = i2c_master_recv();     // save the PORT values
+    i2c_master_ack(1);              // make the ack
+    i2c_master_stop();              // make the stop bit
+    return r;                       // return PORT values
+}
