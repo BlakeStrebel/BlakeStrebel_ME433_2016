@@ -2,6 +2,8 @@
 #include<sys/attribs.h>  // __ISR macro
 #include<stdio.h>        // sprintf
 #include"ILI9163C.h"     // LCD
+#include"LSM6DS33.h"     // IMU
+#include"I2C.h"          // I2C
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
@@ -63,26 +65,80 @@ int main() {
     // initialize modules
     SPI1_init(); // initialize SPI communication
     LCD_init();  // initialize LCD
-    
-    // Write something
-    LCD_clearScreen(WHITE);
-    char message[100] ;
-    sprintf(message,"Hello world %d",1337);
-    LCD_drawArray(28, 32, BLUE, message);
-    
+    i2c_master_setup(); // initialize I2C communication on PIC
+    initIMU();// initialize IMU
+    if (WHOAMI() != 0b01101001)
+    {
+        LATAINV = 10000; // check IMU
+    }
     
     __builtin_enable_interrupts();
     
-    while(1) {
-        
-        _CP0_SET_COUNT(0);  // Set system clock to zero
-        while(_CP0_GET_COUNT() < 12000) // Wait for 0.5 ms
-        {;} // wait
-        LATAINV = 10000;    // Flip power to LED
-        
-        while(!PORTBbits.RB4)
-        {;} // do nothing
-    }
+     // Text formating
+    LCD_clearScreen(WHITE);
+    int x = 3;
+    int y = 10;
+    int xscale = 15;
+    int yscale = 10;
+    char message[100] ;
+    sprintf(message,"Accelerometer: ");
+    LCD_drawArray(x, y, BLUE, message);
+    sprintf(message,"X = ");
+    LCD_drawArray(x, y + yscale, BLUE, message);
+    sprintf(message,"Y = ");
+    LCD_drawArray(x, y + 2*yscale, BLUE, message);
+    sprintf(message,"Z = ");
+    LCD_drawArray(x, y + 3*yscale, BLUE, message);
+    sprintf(message,"Gyroscope: ");
+    LCD_drawArray(x, y + 4*yscale, BLUE, message);
+    sprintf(message,"X = ");
+    LCD_drawArray(x, y + 5*yscale, BLUE, message);
+    sprintf(message,"Y = ");
+    LCD_drawArray(x, y + 6*yscale, BLUE, message);
+    sprintf(message,"Z = ");
+    LCD_drawArray(x, y + 7*yscale, BLUE, message);
+    sprintf(message,"Temperature: ");
+    LCD_drawArray(x, y + 8*yscale, BLUE, message);
+    sprintf(message,"T = ");
+    LCD_drawArray(x, y + 9*yscale, BLUE, message);
     
     
-}
+    char length = 14;
+    unsigned char IMU_data[length];
+    short x_accel, y_accel, z_accel, x_gyro, y_gyro, z_gyro, temp;
+    
+   // while(1) {
+        
+       // _CP0_SET_COUNT(0);
+        
+        i2c_read_multiple(IMU_ADDRESS, OUT_TEMP_L, IMU_data, length);
+        x_accel = (IMU_data[1] << 8 )| IMU_data[0];
+        y_accel = (IMU_data[3] << 8 )| IMU_data[2];
+        z_accel = (IMU_data[5] << 8 )| IMU_data[4];
+        x_gyro = (IMU_data[7] << 8 )| IMU_data[6]; 
+        y_gyro = (IMU_data[9] << 8 )| IMU_data[8];
+        z_gyro = (IMU_data[11] << 8 )| IMU_data[10];
+        temp = (IMU_data[13] << 8 )| IMU_data[12];
+       
+        sprintf(message," %d",x_accel);
+        LCD_drawArray(x + xscale, y + yscale, BLUE, message);
+        sprintf(message," %d",y_accel);
+        LCD_drawArray(x + xscale, y + 2*yscale, BLUE, message);
+        sprintf(message," %d",z_accel);
+        LCD_drawArray(x + xscale, y + 3*yscale, BLUE, message);
+        sprintf(message," %d",x_gyro);
+        LCD_drawArray(x + xscale, y + 5*yscale, BLUE, message);
+        sprintf(message," %d",y_gyro);
+        LCD_drawArray(x + xscale, y + 6*yscale, BLUE, message);
+        sprintf(message," %d",z_gyro);
+        LCD_drawArray(x + xscale, y + 7*yscale, BLUE, message);
+        sprintf(message," %d",temp);
+        LCD_drawArray(x + xscale, y + 9*yscale, BLUE, message);
+        
+        
+      //  while(_CP0_GET_COUNT() < 24000000) { 
+        ;   // Wait for 1 s
+      //  }
+ //   } 
+    
+} 
