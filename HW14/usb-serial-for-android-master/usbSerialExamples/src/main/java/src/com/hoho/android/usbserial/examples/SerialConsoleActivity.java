@@ -125,6 +125,7 @@ public class SerialConsoleActivity extends Activity implements TextureView.Surfa
     TextView thresholdTextView;
 
     int threshold;
+    int COM;
 
 
 
@@ -191,17 +192,6 @@ public class SerialConsoleActivity extends Activity implements TextureView.Surfa
                 progressChanged = progress;
                 thresholdTextView.setText("The threshold is: "+progress);
                 threshold = progress;
-
-                /*
-                myTextView.setText("The PWM is: "+progress);
-                PWM = progress;
-                String sendString = String.valueOf(PWM) + "\n";
-                try {
-                    sPort.write(sendString.getBytes(),10); // 10 is the timeout
-                }
-                catch (IOException e) {}
-                */
-
             }
 
             @Override
@@ -276,7 +266,6 @@ public class SerialConsoleActivity extends Activity implements TextureView.Surfa
                 wbCOM = wbCOM + thresholdedPixels[i] * i;
             }
 
-            int COM;
             //watch out for divide by 0
             if (wbTotal <= 0) {
                 COM = bmp.getWidth() / 2;   //sets default COM
@@ -287,8 +276,16 @@ public class SerialConsoleActivity extends Activity implements TextureView.Surfa
             // draw a circle where you think the COM is
             canvas.drawCircle(COM, startY, 5, paint1);
 
+            // send COM to PIC
+            String sendString = String.valueOf(COM) + "\n";
+                try {
+                    sPort.write(sendString.getBytes(),10); // 10 is the timeout
+                }
+                catch (IOException e) {}
+            
+
             // also write the value as text
-            //canvas.drawText("COM = " + COM, 10, 200, paint1);
+            canvas.drawText("COM = " + COM, 10, 200, paint1);
             c.drawBitmap(bmp, 0, 0, null);
             mSurfaceHolder.unlockCanvasAndPost(c);
 
