@@ -93,20 +93,20 @@ int main ( void )
     TRISBbits.TRISB4 = 1;
     
     // configure output compare pins
-    RPA0Rbits.RPA0R = 0b0101;   // use A0 pin for OC1
+    RPA4Rbits.RPA4R = 0b0101;   // use A4 (user LED) pin for OC4
     
-     // Set up Peripheral Timer2 and OC1
+     // Set up Peripheral Timer2 and OC4
     T2CONbits.TCKPS = 0b011;// Timer2 prescaler N = 8
     PR2 = 5999;             // Frequency = 1kHz
     TMR2 = 0;               // Timer2 initial count 0;
     
-    OC1CONbits.OCM = 0b110; // PWM mode without fault pin
-    OC1CONbits.OCTSEL = 0;  // Use Timer2 for comparison        
-    OC1R = 3000;            // Duty cycle 50%
-    OC1RS = 0;
+    OC4CONbits.OCM = 0b110; // PWM mode without fault pin
+    OC4CONbits.OCTSEL = 0;  // Use Timer2 for comparison        
+    OC4R = 3000;            // Duty cycle 50%
+    OC4RS = 0;
     
     T2CONbits.ON = 1;       // Turn on Timer2
-    OC1CONbits.ON = 1;      // Turn on Output Control 1
+    OC4CONbits.ON = 1;      // Turn on Output Control 4
     
     __builtin_enable_interrupts();
     

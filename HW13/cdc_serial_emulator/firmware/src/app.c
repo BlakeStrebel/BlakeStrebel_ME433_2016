@@ -54,6 +54,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
+#include<xc.h>           // processor SFR definitions
+#include<sys/attribs.h>  // __ISR macro
+
 int ii;
 char rx[100];
 int pos;
@@ -454,7 +457,7 @@ void APP_Tasks ( void )
                         pos = 0;
                         sscanf(rx,"%d",&qq);
                         // put PWM stuff here
-                        OC1RS = qq*60;
+                        OC4RS = qq*60;
                     }
                     else {
                         rx[pos] = appData.readBuffer[ii];
