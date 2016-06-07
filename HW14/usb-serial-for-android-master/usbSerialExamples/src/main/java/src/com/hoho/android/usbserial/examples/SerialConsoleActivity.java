@@ -268,7 +268,7 @@ public class SerialConsoleActivity extends Activity implements TextureView.Surfa
 
             //watch out for divide by 0
             if (wbTotal <= 0) {
-                COM = bmp.getWidth() / 2;   //sets default COM
+                COM = bmp.getWidth() / 2;   //sets default COM, maybe play with this
             } else {
                 COM = wbCOM / wbTotal;
             }
@@ -282,7 +282,7 @@ public class SerialConsoleActivity extends Activity implements TextureView.Surfa
                     sPort.write(sendString.getBytes(),10); // 10 is the timeout
                 }
                 catch (IOException e) {}
-            
+
 
             // also write the value as text
             canvas.drawText("COM = " + COM, 10, 200, paint1);

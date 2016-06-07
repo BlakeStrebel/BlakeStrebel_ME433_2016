@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/pic32mx795_pim_e16_int_dyn/production/cdc_serial_emulator.X.production.elf">                 
+  <executable name="dist/pic32mx795_pim_e16_int_dyn/production/PIC_racer.X.production.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>132240</length>                 
-      <used>36184</used>                     
-      <free>96056</free>                     
+      <used>36332</used>                     
+      <free>95908</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 

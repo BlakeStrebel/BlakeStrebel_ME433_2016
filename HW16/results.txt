@@ -1,0 +1,12 @@
+Android Camera App:
+
+Camera analyzes concentration of red and green pixels to determine center of brown line on green background. App contains one slider bar which allows the threshold to be adjusted.
+The calculated center of mass (COM) is sent to the PIC at around 15-20 Hz. For this robot, the COM data for only one row of pixels was necessary for good control.
+
+PIC Racer Code:
+
+The PIC recieves the COM value from the app over via usb. Each time a new value is recieved, the PIC ajusts the PWM values for the left/right motor. If the COM value is in the center
+of the screen, PWM is set to 100%; otherwise, COM values corresponding to right turns cause linearly decreasing PWM in the right motor and vice versa. Using this method, at least one of
+the motors was always kept at 100% PWM.
+
+

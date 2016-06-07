@@ -457,8 +457,18 @@ void APP_Tasks ( void )
                         pos = 0;
                         sscanf(rx,"%d",&qq);
                         // put PWM stuff here
-                        OC2RS = 27*qq - 2640;
-                        OC1RS = -21*qq + 12600; 
+                       
+                        if (qq == 320){
+                            OC2RS = 6000;
+                            OC1RS = 6000;
+                        }
+                        else if (qq > 320){
+                            OC1RS = 6000 - 6000*(qq-320)/320;
+                        }
+                        else if (qq < 320){
+                            OC2RS = 6000 - 6000*(320-qq)/320;
+                        }
+                            
                     }
                     else {
                         rx[pos] = appData.readBuffer[ii];
